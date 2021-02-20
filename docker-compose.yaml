@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  broker:
+    container_name: broker
+    image: rabbitmq:management
+    ports:
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+
+  python:
+    container_name: python
+    build: ./python
+    volumes:
+      - ./python:/app
+
+  node:
+    container_name: node
+    build: ./node
+    volumes:
+      - ./node:/app
