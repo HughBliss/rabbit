@@ -6,6 +6,7 @@ services:
     container_name: broker
     image: rabbitmq:management
     ports:
+      - 5672:5672
       - 15672:15672
     environment:
       - RABBITMQ_DEFAULT_USER=user
@@ -16,9 +17,3 @@ services:
     build: ./python
     volumes:
       - ./python:/app
-
-  node:
-    container_name: node
-    build: ./node
-    volumes:
-      - ./node:/app

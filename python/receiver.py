@@ -15,12 +15,12 @@ def main():
             exec(body.decode('utf-8'))
             channel.basic_publish(exchange='',
                         routing_key='results',
-                        body='execution ok')
-            print(' [python] [receiver] Execution complited ok')
+                        body='{"pattern":"result","data":"Execution complited ok"}')
+            print(' [python] [receiver] Execution complited ok ' + body.decode('utf-8'))
         except:
             channel.basic_publish(exchange='',
                         routing_key='results',
-                        body='execution failed')
+                        body='{"pattern":"result","data":"Execution failed"}')
             print(' [python] [receiver] Execution failed')
 
 
