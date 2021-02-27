@@ -7,7 +7,7 @@ import { AppService } from './app.service';
   imports: [
     ClientsModule.register([
       {
-        name: 'TEST_SERVICE',
+        name: 'RuntimeClient',
         transport: Transport.RMQ,
         options: {
           urls: ['amqp://user:password@localhost'],
