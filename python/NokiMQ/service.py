@@ -96,12 +96,14 @@ class Service:
     def listen(self):
         try:
             def callback(_, __, ___, body):
-
                 body = loads(body.decode('utf-8'))
-                # print(self._tasks[body['pattern']].run(body['data']))
+
+                # self._logger.debug(body)
                 try:
-                    self._tasks[body['pattern']].run(body['data'])
-                except: pass
+                    self._tasks[body['pattern']].run(**body['data'])
+                except:
+                    self._logger.error(f"Failed to call {body['pattern']} with args {body['data']}")
+                    pass
 
             self._channel.basic_consume(
                 queue=self._queue,
