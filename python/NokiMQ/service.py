@@ -97,7 +97,6 @@ class Service:
         try:
             def callback(_, __, ___, body):
                 body = loads(body.decode('utf-8'))
-
                 # self._logger.debug(body)
                 try:
                     self._tasks[body['pattern']].run(**body['data'])
@@ -112,6 +111,8 @@ class Service:
             )
             self._logger.info('Consumming...')
             self._channel.start_consuming()
+        except KeyboardInterrupt:
+            self._logger.info('Consuming stopped')
         except:
             self._logger.critical('Consuming error')
             quit(-1)
