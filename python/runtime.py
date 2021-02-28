@@ -12,6 +12,8 @@ BROKER = 'amqp://user:password@broker'
 
 tasks = Service(connection_string=BROKER, queue='tasks', loglevel="DEBUG")
 
+results = Service(connection_string=BROKER, queue='results', loglevel="DEBUG")
+
 @tasks.task
 def add(x, y):
     log.info('from add')
@@ -21,7 +23,7 @@ def add(x, y):
 @tasks.task
 def test(foo, bar):
     log.info('from test')
-    tasks.emit('add', {
+    results.emit('result', {
         'x': foo,
         'y': bar
     })

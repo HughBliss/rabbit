@@ -13,11 +13,9 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    this.runtimeClient.emit('exec', {
-      task: 'task id',
-      user: 'user id',
-      answer: `print('hello')`,
-      tests: 'some tests',
+    this.runtimeClient.emit('test', {
+      foo: 'task id',
+      bar: 'user id',
     });
 
     this.logger.log('task sent');
@@ -26,7 +24,7 @@ export class AppController {
   }
 
   @EventPattern('result')
-  async getResult(data: string) {
+  async getResult(data) {
     this.logger.log(data);
   }
 }
